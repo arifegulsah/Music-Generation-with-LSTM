@@ -63,7 +63,7 @@ en sonda all_midis diye oluşturduğumuz boş arraye bunları append ediyoruz ya
 loop son buluyor. """
 
 #Loading the list of chopin's midi files as stream 
-filepath = "BeethovenMidiFiles/"
+filepath = "C:/Users/arife/Documents/Github Clonelarım/Music Generation with LSTM/Music-Generation-with-LSTM/BeethovenMidiFiles/"
 #Getting midi files
 all_midis= []
 for i in os.listdir(filepath):
@@ -110,12 +110,14 @@ print("Total notes in all the Chopin midis in the dataset:", len(Corpus))
 
 #333333333333333333333333
 
-#şunu print ederek ilk elli notamızı inceleyim. hangi notalar varmış elimizde??
-#toplamda 39325 tane notamız var buarada
+"""şunu print ederek ilk elli notamızı inceleyim. hangi notalar varmış elimizde??
+   toplamda 39325 tane notamız var buarada"""
+   
 print("First fifty values in the Corpus:", Corpus[:50])
 
-#bütün bu sözel şekilde ifade edilen notalar müzikçilerin anlayacağı dildeki notalara python ile çevilebilir
-#yani biz bu notaları nota portresinde gösterebiliriz. bunun için şu kodu yazıyorz
+
+"""bütün bu sözel şekilde ifade edilen notalar müzikçilerin anlayacağı dildeki notalara python ile çevilebilir
+yani biz bu notaları nota portresinde gösterebiliriz. bunun için şu kodu yazıyorz """
 
 #First Lets write some functions that we need to look into the data
 def show(music):
@@ -157,6 +159,11 @@ count_num = Counter(Corpus)
 print("Total unique notes in the Corpus:", len(count_num))
 
 
+"""En çok ve en az bulunan notaları yazdırıyoruz.
+Çünkü bazı notalar sıklıkla gözükürken bazıları çok az gözükmektedir
+ve çok az gözüken notalar yeni generate edeceğimiz fileın yapısını bozabilir.
+İlerleyen fonksiyonumuzda bu az gözüken notaları liste dışında bırakacağız. Ve sıklıkla
+gözüken notalara odaklanacağız."""
 
 #Exploring the notes dictionary
 Notes = list(count_num.keys())
@@ -169,6 +176,8 @@ print("Most frequent note in Corpus appeared:", max(Recurrence), "times")
 print("Least frequent note in Corpus appeared:", min(Recurrence), "time")
 
 
+"""Çizdiriyoruz"""
+
 # Plotting the distribution of Notes
 plt.figure(figsize=(18,3),facecolor="#97BACB")
 bins = np.arange(0,(max(Recurrence)), 50) 
@@ -178,6 +187,8 @@ plt.title("Frequency Distribution Of Notes In The Corpus")
 plt.xlabel("Frequency Of Chords in Corpus")
 plt.ylabel("Number Of Chords")
 plt.show()
+
+"""Görülme sıklığı az olan akorlarımızı biz listede turuyoruz ki sonra bunları eleyelim."""
 
 #Getting a list of rare chords
 rare_note = []
@@ -189,6 +200,8 @@ for index, (key, value) in enumerate(count_num.items()):
 print("Total number of notes that occur less than 100 times:", len(rare_note))
 
 
+"""Görülme sıklığı az olan notaları devre dışı bırakıyoruz.
+remove() fonksiyonumuz bu notaları rare_note ismini verdiğimiz listeden temizliyor."""
 
 #Eleminating the rare notes
 for element in Corpus:
@@ -311,7 +324,7 @@ show(Melody)
 
 
 #To save the generated melody
-Melody.write('midi','Melody_Generated.mid')
+Melody.write('midi','C/../Melody_Generated.mid')
 #to play audio or corpus
 IPython.display.Audio("../input/music-generated-lstm/Melody_Generated 2.wav")
 
