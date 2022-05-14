@@ -324,7 +324,7 @@ show(Melody)
 
 
 #To save the generated melody
-Melody.write('midi','C/../Melody_Generated.mid')
+Melody.write('midi','Melody_Generated.mid')
 #to play audio or corpus
 IPython.display.Audio("../input/music-generated-lstm/Melody_Generated 2.wav")
 
